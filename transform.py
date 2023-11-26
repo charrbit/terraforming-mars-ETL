@@ -1,10 +1,11 @@
+import sys
 import json
 import datetime as dt
 
-path = "/home/astrobits/Code/github/terraforming-mars-scraper/terraforming_mars_scraper/gameData.jsonl"
+pathToGameData = sys.argv[1]
 
 # Load scraped terraforming mars game data
-with open(path, 'r') as jsonInFile:
+with open(pathToGameData, 'r') as jsonInFile:
     gameData = [json.loads(line) for line in jsonInFile]
 
 def printTimestamp():

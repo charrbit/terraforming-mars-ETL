@@ -28,35 +28,18 @@ class GameModeSpider(scrapy.Spider):
             "board": boardCategory.css("input[checked]").attrib["value"].title(),
         }
 
-        # Expansions Used
-        expansionCategory = gameSettingCategories[1]
-        expansions = []
-        for expansion in expansionCategory.css("input[checked]"):
-            inputID = expansion.attrib["id"]
-            label = expansionCategory.css(f"label[for='{inputID}']")
-            expansions.append(label.xpath("span//text()").get())
-        yield {
-            "expansions": expansions,
-        }
-
-        # Special Options
-        optionCategory = gameSettingCategories[3]
-        options = []
-        for option in optionCategory.css("input[checked]"):
-            inputID = option.attrib["id"]
-            label = optionCategory.css(f"label[for='{inputID}']")
-            options.append(label.xpath("span//text()").get())
-        yield {
-            "options": options,
-        }
-
-        # Multiplayer Options
-        mpOptionCategory = gameSettingCategories[4]
-        options = []
-        for option in mpOptionCategory.css("input[checked]"):
-            inputID = option.attrib["id"]
-            label = mpOptionCategory.css(f"label[for='{inputID}']")
-            options.append(label.xpath("span//text()").get())
-        yield {
-            "multiplayer_options": options,
-        }
+        # Specify the game settings that can be looped over (Expansions, Options, Multiplayer Options)
+        gameSettingIndices = [1, 3, 4]
+        for index in gameSettingIndices:
+            gameSettingCategory = gameSettingCategories[index]
+            settingTitle = gameSettingCategory.xpath("h4//text()").get().replace(" ", "_").lower()
+            settings = []
+            # Add each user-selected setting to the settings list for this specific setting category
+            for setting in gameSettingCategory.css("input[checked]"):
+                # Find the label associated with the input element and parse its data
+                inputID = setting.attrib["id"]
+                label = gameSettingCategory.css(f"label[for='{inputID}']")
+                settings.append(label.xpath("span//text()").get().title())
+            yield {
+                settingTitle: settings,
+            }

@@ -3,7 +3,7 @@ import scrapy
 class GameStatsSpider(scrapy.Spider):
     name = "gamestats"
     start_urls = [
-        "file:///home/astrobits/Code/github/terraforming-mars-scraper/samplePage.html",
+        "file:///home/astrobits/Code/github/terraforming-mars-scraper/gameStatsSamplePage.html",
     ]
 
     def parse(self, response):

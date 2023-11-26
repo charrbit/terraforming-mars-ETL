@@ -19,24 +19,27 @@ class GameStatsSpider(scrapy.Spider):
             "generations_played": generationsPlayed.xpath("h2//text()").getall()[1].strip(),
         }
 
-        # Player
-        # Exclude the table header
-        for player in response.css(".game_end_table tr")[1:]:
+        # Player Game Statistics
+        playerStats = []
+        for player in response.css(".game_end_table tr")[1:]: # Exclude table header
             playerData = player.xpath("td//text()").getall()
-            del(playerData[1]) # Remove empty string element
-            yield {
+            # Build a player stats object and add it to the list of player statistics
+            playerStats.append({
                 "name": playerData[0],
-                "corporation": playerData[1],
-                "terraformer_rating": playerData[2],
-                "milestone_points": playerData[3],
-                "award_points": playerData[4],
-                "greenery_points": playerData[5],
-                "city_points": playerData[6],
-                "victory_points": playerData[7],
-                "escape_velocity_penality": playerData[8],
-                "total": playerData[9],
-                "final_credits": playerData[10],
-                "playtime": playerData[11],
-                "actions_taken": playerData[12],
-            }
+                "corporation": playerData[2],
+                "terraformer_rating": playerData[3],
+                "milestone_points": playerData[4],
+                "award_points": playerData[5],
+                "greenery_points": playerData[6],
+                "city_points": playerData[7],
+                "victory_points": playerData[8],
+                "escape_velocity_penality": playerData[9],
+                "total": playerData[10],
+                "final_credits": playerData[11],
+                "playtime": playerData[12],
+                "actions_taken": playerData[13],
+            })
+        yield {
+            "player_statistics": playerStats,
+        }
         

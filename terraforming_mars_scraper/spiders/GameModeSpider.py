@@ -2,9 +2,9 @@ import scrapy
             
 class GameModeSpider(scrapy.Spider):
     name = "gamemode"
-    start_urls = [
-        "file:///home/astrobits/Code/github/terraforming-mars-scraper/gameModeSamplePage.html",
-    ]
+    
+    def start_requests(self):
+        yield scrapy.Request(self.startURL, self.parse)
 
     def parse(self, response):
         gameSettingCategories = response.css("div.create-game-page-column")

@@ -2,9 +2,9 @@ import scrapy
             
 class GameStatsSpider(scrapy.Spider):
     name = "gamestats"
-    start_urls = [
-        "file:///home/astrobits/Code/github/terraforming-mars-scraper/gameStatsSamplePage.html",
-    ]
+    
+    def start_requests(self):
+        yield scrapy.Request(self.startURL, self.parse)
 
     def parse(self, response):
         # Winner

@@ -15,6 +15,17 @@ class GameModeSpider(scrapy.Spider):
             "number_of_players": playerCategory.css("input[checked]").attrib["value"],
         }
 
+        # Players
+        players = []
+        for player in response.css("div.columns > div"):
+            name = player.css("input.create-game-player-name").attrib["value"].title()
+            color = player.css("div.create-game-page-color-row input[checked]").attrib["value"].title()
+            # Build a player object and add it to the list of players
+            players.append({"name": name, "color": color})
+        yield {
+            "players": players,
+        }
+
         # Number of Starting Corporations
         optionCategory = gameSettingCategories[3]
         startingCorporations = optionCategory.xpath("label//input").attrib["value"]

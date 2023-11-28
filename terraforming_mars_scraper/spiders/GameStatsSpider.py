@@ -4,7 +4,7 @@ class GameStatsSpider(scrapy.Spider):
     name = "gamestats"
     
     def start_requests(self):
-        yield scrapy.Request(self.startURL, self.parse)
+        yield scrapy.Request(f"file://{self.startURL}", self.parse)
 
     def parse(self, response):
         # Winner

@@ -4,7 +4,7 @@ class GameModeSpider(scrapy.Spider):
     name = "gamemode"
     
     def start_requests(self):
-        yield scrapy.Request(self.startURL, self.parse)
+        yield scrapy.Request(f"file://{self.startURL}", self.parse)
 
     def parse(self, response):
         gameSettingCategories = response.css("div.create-game-page-column")

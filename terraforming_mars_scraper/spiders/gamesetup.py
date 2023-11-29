@@ -1,7 +1,7 @@
 import scrapy
             
-class GameModeSpider(scrapy.Spider):
-    name = "gamemode"
+class GameSetupSpider(scrapy.Spider):
+    name = "gamesetup"
     
     def start_requests(self):
         yield scrapy.Request(f"file://{self.startURL}", self.parse)

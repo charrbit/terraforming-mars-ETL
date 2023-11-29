@@ -1,7 +1,7 @@
 import scrapy
             
-class GameStatsSpider(scrapy.Spider):
-    name = "gamestats"
+class EndOfGameSpider(scrapy.Spider):
+    name = "endofgame"
     
     def start_requests(self):
         yield scrapy.Request(f"file://{self.startURL}", self.parse)

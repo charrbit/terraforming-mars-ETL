@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 import json
 
-endOfGameURL = "https://terraforming-mars.herokuapp.com/the-end?[...]"
+endOfGameURL = "https://terraforming-mars.herokuapp.com/the-end?id=pe231633bd7a0"
 
 with sync_playwright() as pw:
     # Go to URL and wait for dynamic content to finish loading
@@ -24,6 +24,7 @@ winner = winnerSoup.span.span.string
 generations = generationSoup.h2.contents[1].strip()
 
 playerData = playerDataSoup.find_all("tr")[1:]
+# Names of the values to be extracted
 playerDataKeys = [
     "name",
     "corporation",

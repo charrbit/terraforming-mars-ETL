@@ -24,7 +24,22 @@ winner = winnerSoup.span.span.string
 generations = generationSoup.h2.contents[1].strip()
 
 playerData = playerDataSoup.find_all("tr")[1:]
-players = [list(player.stripped_strings) for player in playerData]
+playerDataKeys = [
+    "name",
+    "corporation",
+    "terraformer_rating",
+    "milestone_points",
+    "award_points",
+    "greenery_points",
+    "city_points",
+    "victory_points",
+    "escape_velocity_deduction",
+    "final_score",
+    "final_credits", 
+    "playtime", 
+    "actions_taken"]
+playerDataValues = [list(player.stripped_strings) for player in playerData]
+players = [dict(zip(playerDataKeys, playerValueList)) for playerValueList in playerDataValues]
 
 # Read the settings used for this game
 settingsFilename = "activeSettings.json"

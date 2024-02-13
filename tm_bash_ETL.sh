@@ -16,3 +16,7 @@ python3 transform/transformForText.py
 # Load
 # Move transformed data to destination directory
 bash load/loadText.sh $(date '+%m%d%y') $destinationDirectory
+
+# Cleanup
+rm activeSettings.json
+rm -r transform/__pycache__

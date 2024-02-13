@@ -1,6 +1,6 @@
 from printFunctions import *
 
-def transformToText(gameData):
+def transformForText(gameData):
     printTimestamp()
     print() # newline
     print("[WINNER]") # section title

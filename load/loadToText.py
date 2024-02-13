@@ -1,5 +1,5 @@
 import json
-from transformForText import transformToText
+from transformForText import transformForText
 
 # Read terraforming mars game data
 gameDataFilename = "gameData.json"
@@ -8,4 +8,4 @@ with open(gameDataFilename, 'r') as inFile:
 
 # Transform game data for human-readable text output
 # (Redirect standard output to load to destination .txt file)
-transformToText(gameData)
+transformForText(gameData)

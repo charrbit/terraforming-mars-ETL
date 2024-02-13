@@ -1,4 +1,7 @@
 import json
+
+import sys
+sys.path.append("/[...]/transform/")
 from transformForText import transformForText
 
 # Read terraforming mars game data

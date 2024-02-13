@@ -17,14 +17,14 @@ with sync_playwright() as pw:
 # Parse HTML
 winnerSoup = soup.find(class_="game-end-winer-announcement")
 generationSoup = soup.find(class_="game_end_victory_points")
-playerStatSoup = soup.find(class_="game_end_table")
+playerDataSoup = soup.find(class_="game_end_table")
 
 winner = winnerSoup.span.span.string
 
 generations = generationSoup.h2.contents[1].strip()
 
-playerStats = playerStatSoup.find_all("tr")[1:]
-players = [list(player.stripped_strings) for player in playerStats]
+playerData = playerDataSoup.find_all("tr")[1:]
+players = [list(player.stripped_strings) for player in playerData]
 
 # Read the settings used for this game
 settingsFilename = "activeSettings.json"
